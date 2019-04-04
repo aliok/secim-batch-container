@@ -92,7 +92,9 @@ async function getBoxResults(browser, name, url) {
 
     const boxResults = {
         name: name,
-        url: url
+        url: url,
+        retrievalTimeMs: new Date().getTime(),
+        retrievalTimeHumanFriendly: new Date()
     };
 
     const page = await browser.newPage();
