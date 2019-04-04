@@ -45,7 +45,7 @@ if (startIndex <= endIndex) {
 }
 
 function startBatchProcess(startIndex, endIndex) {
-    let sandikCount = endIndex - startIndex;
+    let boxCount = endIndex - startIndex;
     console.log('Start and end indices', startIndex, endIndex);
 
     const boxNames = Object.keys(boxUrls);
@@ -65,7 +65,7 @@ function startBatchProcess(startIndex, endIndex) {
         let counter = 0;
         for (let boxName of boxNamesToProcess) {
             counter++;
-            console.log(new Date(), 'Reading box: ' + boxName + '      ' + counter + '/' + sandikCount);
+            console.log(new Date(), 'Reading box: ' + boxName + '      ' + counter + '/' + boxCount);
             try {
                 const boxUrl = buildBoxUrl(boxName);
                 const boxResults = await getBoxResults(browser, boxName, boxUrl);
