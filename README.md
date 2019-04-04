@@ -59,3 +59,26 @@ Calistiralim:
 ```
 docker run -e BATCH_SIZE=5 -e BATCH_INDEX=10 -p 3000:3000 aliok/secim-batch-container
 ```
+
+Kubernetes uzerinde tek pod calistirma:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secim-batch-container-N
+spec:
+  containers:
+    - image: aliok/secim-batch-container
+      imagePullPolicy: IfNotPresent
+      name: secim-batch-container
+      env:
+        - name: BATCH_SIZE
+          value: "5"
+        - name: BATCH_INDEX
+          value: "5"
+      ports:
+        - containerPort: 3000
+          protocol: TCP
+  restartPolicy: Never
+```

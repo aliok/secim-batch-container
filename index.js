@@ -28,7 +28,7 @@ app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 console.log('Environment:');
 console.log('--BATCH_INDEX', process.env['BATCH_INDEX']);
-console.log('--BATCH_INDEX', process.env['BATCH_SIZE']);
+console.log('--BATCH_SIZE', process.env['BATCH_SIZE']);
 console.log('--CHROME_EXECUTABLE_PATH', process.env['CHROME_EXECUTABLE_PATH']);
 const batchSize = parseInt(process.env['BATCH_SIZE'], 10);
 const batchIndex = parseInt(process.env['BATCH_INDEX'], 10);
@@ -45,7 +45,7 @@ if (startIndex <= endIndex) {
 }
 
 function startBatchProcess(startIndex, endIndex) {
-    let sandikCount = endIndex - startIndex + 1;
+    let sandikCount = endIndex - startIndex;
     console.log('Start and end indices', startIndex, endIndex);
 
     const boxNames = Object.keys(boxUrls);
@@ -67,7 +67,8 @@ function startBatchProcess(startIndex, endIndex) {
             counter++;
             console.log(new Date(), 'Reading box: ' + boxName + '      ' + counter + '/' + sandikCount);
             try {
-                const boxResults = await getBoxResults(browser, boxName, boxUrls[boxName]);
+                const boxUrl = buildBoxUrl(boxName);
+                const boxResults = await getBoxResults(browser, boxName, boxUrl);
                 console.log('Successfully fetched box results for box', boxName);
                 result[boxName] = boxResults;
             } catch (ex) {
@@ -82,11 +83,17 @@ function startBatchProcess(startIndex, endIndex) {
     })();
 }
 
+function buildBoxUrl(boxName) {
+    return 'https://sts.chp.org.tr/SonucDetay.aspx?cmd=' + boxUrls[boxName];
+}
 
 async function getBoxResults(browser, name, url) {
     console.log('Going to read box results for', name, url);
 
-    const boxResults = {};
+    const boxResults = {
+        name: name,
+        url: url
+    };
 
     const page = await browser.newPage();
     const pendingXHR = new PendingXHR(page);
@@ -102,7 +109,7 @@ async function getBoxResults(browser, name, url) {
         }
     });
 
-    await page.goto('https://sts.chp.org.tr/SonucDetay.aspx?cmd=' + url, {waitUntil: 'networkidle2'});
+    await page.goto(url, {waitUntil: 'networkidle2'});
     await page.waitForSelector('.chp-vote-row');
     boxResults['A'] = parseBoxPageHtml(await page.content());
 
