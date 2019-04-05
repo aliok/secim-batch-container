@@ -4,14 +4,14 @@ This container is created to crawl the 2019 election results in Turkey. It opens
 in a headless browser (using Puppeteer) and clicks around to view different parts of a single box. ("box" here means a group of votes, a concept to make things easier when counting votes).
 Results retrieved will be served over an endpoint on the container, available to be picked by an operator that manages the containers.
 
-This project is implemented as a practice on learning the Kubernetes Operators. The operator that manages the pods is here: 
+This project is implemented as a practice on learning the Kubernetes Operators. The operator that manages the pods is here: <https://github.com/aliok/secim-batch-plain-operator>  
 
 ------
 
 Bu container 2019 yerel secimlerinin sandik sonuclarini toplamak icin olusturuldu. Container bir headless browser uzerinde CHP'nin secim sistemini acip, batch icinde verilen sandiklar icin
 degisik secim sonuclarini (ilce belediye, genel meclis, buyuksehir) toplar ve bunu bir endpoint uzerinden verir. Bu endpoint daha sonra bir operator tarafindan kullanilip sonuclar toparlanir.
 
-Bu projeyi Kubernetes operatorleri uzerinde pratik yapmak icin yaptim. Operatoru surada bulabilirsiniz.
+Bu projeyi Kubernetes operatorleri uzerinde pratik yapmak icin yaptim. Operatoru surada bulabilirsiniz: <https://github.com/aliok/secim-batch-plain-operator>
 
 ### Room for Improvement / Yapilabilir Gelistirmeler
 
