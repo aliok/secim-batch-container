@@ -44,6 +44,7 @@ BATCH_INDEX=0 BATCH_SIZE=5 npm start
 - <localhost:3000/result>: 
 
 When the retrieval is complete, which means `status` is `DONE`, result can be read for the given batch. For example:
+
 Islem bittiginde, yani `status` `DONE` oldugunda, buradan verdiginiz batch icin sonuclari alabilirsiniz. Ornegin:
 
 ```json
@@ -83,6 +84,7 @@ Islem bittiginde, yani `status` `DONE` oldugunda, buradan verdiginiz batch icin 
 ```
 
 There will be a key in the output for each box. Votes are separated into 3 items: A, B and C for different things that the people voted on.
+
 Uretilen JSON'da her sandik icin bir key var. Oy bilgileri A, B ve C diye ayrilmis vaziyette. Bunlar ilce belediye, genel meclis ve buyuksehir belediye icin olan oylar. 
 
 - <localhost:3000/errors>: Lists the boxes that the system cannot retrieve/process info. Alinamayan/islenemeyen sandik bilgilerini verir.
@@ -90,6 +92,7 @@ Uretilen JSON'da her sandik icin bir key var. Oy bilgileri A, B ve C diye ayrilm
 ### Running in Docker / Docker uzerinde calistirma
 
 An image is already pushed to Docker hub: https://hub.docker.com/r/aliok/secim-batch-container
+
 Docker Hub'da bir imaj var: https://hub.docker.com/r/aliok/secim-batch-container
 
 ```
@@ -98,6 +101,7 @@ docker run -e BATCH_SIZE=5 -e BATCH_INDEX=10 -p 3000:3000 aliok/secim-batch-cont
 ```
 
 Then go to the endpoints mentioned above.
+
 Sonra yukarida bahsedilen endpointlere git.
 
 ### Building the Docker image / Docker imajini olusturma
@@ -138,4 +142,5 @@ spec:
 ```
 
 Scheduling multiple pods and managing them can be done using the operator mentioned in the introduction section.
+
 Kubernetes uzerinde birden cok pod olusturma ve onlari yonetme, giris kisminda bahsedilen operator ile yapilabilir.
